@@ -4,7 +4,7 @@ import HeaderTabs from "../components/HeaderTabs";
 
 export default function Home() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ marginTop: 40 }}>
       <HeaderTabs />
     </SafeAreaView>
   );
