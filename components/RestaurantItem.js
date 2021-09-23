@@ -2,21 +2,54 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function RestaurantItem() {
+// dummy data similar to yelp api
+export const localRestaurantData = [
+  {
+    name: "Tinkus Bhawarkua",
+    image_url: "aaaa",
+    categories: ["Cafe", "Bar"],
+    price: "$$",
+    reviews: 1244,
+    rating: 4.2,
+  },
+  {
+    name: "Namo Sandwich",
+    image_url: "aaaa",
+    categories: ["Cafe", "Bar"],
+    price: "$$",
+    reviews: 1214,
+    rating: 4.5,
+  },
+  {
+    name: "Dhaba Junction",
+    image_url: "aaaa",
+    categories: ["Cafe", "Bar"],
+    price: "$$",
+    reviews: 1121,
+    rating: 4.0,
+  },
+];
+
+export default function RestaurantItem(props) {
   return (
     <TouchableOpacity activeOpacity={0.9} style={{ marginBottom: 20 }}>
-      <View style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}>
-        {/* restaurant image */}
-        <RestaurantImage />
-
-        {/* restaurant info and texts and rating */}
-        <RestaurantInfo />
-      </View>
+      {/* {localRestaurantData.map((restData, index) => ( */}
+      {props.restaurantData.map((restData, index) => (
+        <View
+          key={index}
+          style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
+        >
+          {/* restaurant image */}
+          <RestaurantImage image={restData.image} />
+          {/* restaurant info and texts and rating */}
+          <RestaurantInfo name={restData.name} rating={restData.rating} />
+        </View>
+      ))}
     </TouchableOpacity>
   );
 }
 
-const RestaurantImage = () => (
+const RestaurantImage = ({ image }) => (
   <>
     <Image
       source={{
@@ -33,7 +66,7 @@ const RestaurantImage = () => (
   </>
 );
 
-const RestaurantInfo = () => (
+const RestaurantInfo = ({ name, rating }) => (
   <View
     style={{
       flexDirection: "row",
@@ -43,7 +76,7 @@ const RestaurantInfo = () => (
     }}
   >
     <View>
-      <Text style={{ fontSize: 15, fontWeight: "bold" }}>Restaurant Name</Text>
+      <Text style={{ fontSize: 15, fontWeight: "bold" }}>{name}</Text>
       <Text style={{ fontSize: 13, color: "gray" }}>30-45 mins</Text>
     </View>
     <View
@@ -56,7 +89,7 @@ const RestaurantInfo = () => (
         borderRadius: 15,
       }}
     >
-      <Text>4.5</Text>
+      <Text>{rating}</Text>
     </View>
   </View>
 );
